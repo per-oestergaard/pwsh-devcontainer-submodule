@@ -8,9 +8,11 @@ ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
+COPY bashrc /etc/bashrc
+
 # shadow before groupmod
 RUN apk add --no-cache shadow \
-  && apt-get install -y sudo \
+  && apk add --no-cache sudo \
   && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
   && chmod 0440 /etc/sudoers.d/$USERNAME
   
