@@ -6,20 +6,18 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:0-alpine-${VARIANT}
 
 ARG USERNAME=vscode
 ARG USER_UID=1000
-ARG USER_GID=$USER_UID
+# ARG USER_GID=$USER_UID
 
-COPY bashrc /etc/bashrc
+# Add sudo for the non-admin user
 
-# shadow before groupmod
-RUN apk add --no-cache shadow \
-  && apk add --no-cache sudo \
-  && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
-  && chmod 0440 /etc/sudoers.d/$USERNAME
-  
-RUN groupmod --gid $USER_GID $USERNAME \
-  && usermod --uid $USER_UID --gid $USER_GID $USERNAME \
-  && chown -R $USER_UID:$USER_GID /home/$USERNAME
-  
+RUN apk add --no-cache sudo \
+    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME
+
+# Ensure docker includes sudo
+ 
+COPY bashrc /home/$USERNAME/.bashrc
+
 # ** [Optional] Uncomment this section to install additional packages. **
 RUN apk update
 
