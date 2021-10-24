@@ -12,6 +12,7 @@
 	"settings": {},
 	"mounts": [
 		// "type=bind,source=//var/run/docker.sock,target=/var/run/docker.sock"
+		"type=bind,source=${localEnv:USERPROFILE}\\.config,target=/.config"
 	],
 
 	// Add the IDs of extensions you want installed when the container is created.
@@ -19,7 +20,8 @@
 	"extensions": [
 		"ms-azuretools.vscode-docker",
 		"me-dutour-mathieu.vscode-github-actions",
-		"cschleiden.vscode-github-actions"
+		"cschleiden.vscode-github-actions",
+		"ms-vscode.powershell"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
