@@ -7,12 +7,13 @@
 		// Update 'VARIANT' to pick an Alpine version: 3.11, 3.12, 3.13, 3.14
 		"args": { "VARIANT": "3.13" }
 	},
-	
-	// Set *default* container specific settings.json values on container create. 
+
+	// Set *default* container specific settings.json values on container create.
 	"settings": {},
 	"mounts": [
 		// "type=bind,source=//var/run/docker.sock,target=/var/run/docker.sock"
-		"type=bind,source=${localEnv:USERPROFILE}\\.config,target=/.config"
+		"type=bind,source=${localEnv:USERPROFILE}/.${localEnv:GITHUB_COMPANY_NAME}/${localWorkspaceFolderBasename}/config.clixml,target=/config/config.clixml,readonly",
+		"type=bind,source=${localEnv:USERPROFILE}/.${localEnv:GITHUB_COMPANY_NAME}/${localWorkspaceFolderBasename}/state,target=/state"
 	],
 
 	// Add the IDs of extensions you want installed when the container is created.
