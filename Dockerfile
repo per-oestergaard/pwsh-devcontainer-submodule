@@ -11,11 +11,11 @@ ARG USER_UID=1000
 # Add sudo for the non-admin user
 
 RUN apk add --no-cache sudo \
-    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
-    && chmod 0440 /etc/sudoers.d/$USERNAME
+  && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+  && chmod 0440 /etc/sudoers.d/$USERNAME
 
 # Ensure docker includes sudo
- 
+
 COPY bashrc /home/$USERNAME/.bashrc
 
 # ** [Optional] Uncomment this section to install additional packages. **
